@@ -41,7 +41,7 @@ static size_t hash(char *val, size_t cap)
   return hash % cap;
 }
 
-int kv_put(kv_t *db, const char *key, const char *value)
+int kv_put(kv_t *db, char *key, char *value)
 {
   if (db == NULL || key == NULL || value == NULL)
   {
