@@ -17,8 +17,8 @@ kv_t *kv_init(size_t capacity)
 
   kv->capacity = capacity;
   kv->count = 0;
-  kv->data = calloc(capacity, sizeof(*kv->data));
-  if (kv->data == NULL)
+  kv->entries = calloc(capacity, sizeof(*kv->entries));
+  if (kv->entries == NULL)
   {
     return NULL;
   }
