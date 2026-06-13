@@ -144,11 +144,11 @@ int kv_delete(kv_t *db, char *key)
   return -1;
 }
 
-int kv_free(kv_t *db)
+void kv_free(kv_t *db)
 {
   if (db == NULL)
   {
-    return -1;
+    return;
   }
 
   for (int i = 0; i < db->capacity; i += 1)
@@ -165,6 +165,4 @@ int kv_free(kv_t *db)
 
   free(db->entries);
   free(db);
-
-  return 0;
 }
