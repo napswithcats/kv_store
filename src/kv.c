@@ -2,8 +2,13 @@
 
 #include "kv.h"
 
-kv_t *kv_init(int capacity)
+kv_t *kv_init(size_t capacity)
 {
+  if (capacity == 0)
+  {
+    return NULL;
+  }
+
   kv_t *kv = malloc(sizeof(kv_t));
   if (kv == NULL)
   {
@@ -12,7 +17,7 @@ kv_t *kv_init(int capacity)
 
   kv->capacity = capacity;
   kv->count = 0;
-  kv->data = calloc(capacity, sizeof(kv->data));
+  kv->data = calloc(capacity, sizeof(*kv->data));
   if (kv->data == NULL)
   {
     return NULL;
