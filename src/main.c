@@ -45,11 +45,14 @@ int main(void)
   val = kv_get(db, "none");
   assert(val == NULL);
 
+  int count = db->count;
   int rv = kv_delete(db, "none");
   assert(rv == -1);
+  assert(db->count == count);
 
   rv = kv_delete(db, "hello");
   assert(rv == 0);
+  assert(db->count == count - 1);
   val = kv_get(db, "hello");
   assert(val == NULL);
 }
