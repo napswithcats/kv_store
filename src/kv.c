@@ -67,7 +67,7 @@ int kv_put(kv_t *db, char *key, char *value)
       return 0;
     }
 
-    if (!entry->key || entry->key == TOMBSTONE)
+    if (entry->key == NULL || entry->key == TOMBSTONE)
     {
       char *newkey = strdup(key);
       char *newval = strdup(value);
@@ -85,4 +85,35 @@ int kv_put(kv_t *db, char *key, char *value)
   }
 
   return -2;
+}
+
+char *kv_get(kv_t *db, char *key)
+{
+  if (db == NULL || key == NULL)
+  {
+    return NULL;
+  }
+
+  size_t h = hash(key, db->capacity);
+  // kv_entry_t *entry = &db->entries[h];
+  // if (entry->key && entry->key != (void *)TOMBSTONE)
+  // {
+  //   return entry->value;
+  // }
+
+  for (int i = 0; i < db->capacity - 1; i += 1)
+  {
+    size_t index = (h + i) % db->capacity;
+    kv_entry_t *entry = &db->entries[index];
+    if (entry->key && entry->key != TOMBSTONE && strcmp(entry->key, key) == 0)
+    {
+      return entry->value;
+    }
+    if (entry->key == NULL)
+    {
+      break;
+    }
+  }
+
+  return NULL;
 }

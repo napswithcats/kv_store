@@ -4,15 +4,6 @@
 
 #include "kv.c"
 
-void verify_put(kv_t *db, int i, char *key, char *val)
-{
-  assert(i >= 0);
-  assert(i < db->capacity);
-  assert(db->count == 1);
-  assert(strcmp(db->entries[i].key, key) == 0);
-  assert(strcmp(db->entries[i].value, val) == 0);
-}
-
 int main(void)
 {
   kv_t *db = kv_init(16);
@@ -23,14 +14,10 @@ int main(void)
   int i = kv_put(db, "hello", "world");
   assert(i == 0);
   assert(db->count == 1);
-  assert(strcmp(db->entries[i].key, "hello") == 0);
-  assert(strcmp(db->entries[i].value, "world") == 0);
 
   i = kv_put(db, "foo", "bar");
   assert(i == 0);
   assert(db->count == 2);
-  assert(strcmp(db->entries[i].key, "foo") == 0);
-  assert(strcmp(db->entries[i].value, "bar") == 0);
 
   kv_put(db, "yello", "world");
   kv_put(db, "hellp", "world");
@@ -41,4 +28,20 @@ int main(void)
       printf("[%d] %s: %s\n", i, db->entries[i].key, db->entries[i].value);
     }
   }
+
+  char *val = 0;
+  val = kv_get(db, "hello");
+  assert(val != NULL);
+  assert(strcmp(val, "world") == 0);
+
+  val = kv_get(db, "yello");
+  assert(val != NULL);
+  assert(strcmp(val, "world") == 0);
+
+  val = kv_get(db, "foo");
+  assert(val != NULL);
+  assert(strcmp(val, "bar") == 0);
+
+  val = kv_get(db, "none");
+  assert(val == NULL);
 }
