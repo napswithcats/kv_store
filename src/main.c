@@ -55,4 +55,7 @@ int main(void)
   assert(db->count == count - 1);
   val = kv_get(db, "hello");
   assert(val == NULL);
+
+  kv_free(db);
+  db = NULL;
 }
