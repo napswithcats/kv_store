@@ -3,21 +3,22 @@
 
 #include <stdlib.h>
 
+#define TOMBSTONE ((char *)0x1)
+
 typedef struct kv_entry_t kv_entry_t;
-struct kv_entry_t
-{
+struct kv_entry_t {
   char *key;
   char *value;
 };
 
 typedef struct kv_t kv_t;
-struct kv_t
-{
+struct kv_t {
   kv_entry_t *entries;
   size_t capacity;
   size_t count;
 };
 
 kv_t *kv_init(size_t capacity);
+int kv_put(kv_t *db, const char *key, const char *value);
 
 #endif // KV_H
