@@ -13,7 +13,7 @@ struct kv_entry_t
 typedef struct kv_t kv_t;
 struct kv_t
 {
-  kv_entry_t *data;
+  kv_entry_t *entries;
   size_t capacity;
   size_t count;
 };
