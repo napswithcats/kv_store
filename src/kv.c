@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include "kv.h"
+#include "../inc/kv.h"
 
 kv_t *kv_init(size_t capacity)
 {
