@@ -44,4 +44,12 @@ int main(void)
 
   val = kv_get(db, "none");
   assert(val == NULL);
+
+  int rv = kv_delete(db, "none");
+  assert(rv == -1);
+
+  rv = kv_delete(db, "hello");
+  assert(rv == 0);
+  val = kv_get(db, "hello");
+  assert(val == NULL);
 }
