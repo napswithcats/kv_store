@@ -21,19 +21,16 @@ int main(void)
   assert(db->count == 0);
 
   int i = kv_put(db, "hello", "world");
-  assert(i >= 0);
-  assert(i < db->capacity);
+  assert(i == 0);
   assert(db->count == 1);
   assert(strcmp(db->entries[i].key, "hello") == 0);
   assert(strcmp(db->entries[i].value, "world") == 0);
 
-  int i2 = kv_put(db, "foo", "bar");
-  printf("%d\n", i2);
-  assert(i2 >= 0);
-  assert(i2 < db->capacity);
+  i = kv_put(db, "foo", "bar");
+  assert(i == 0);
   assert(db->count == 2);
-  assert(strcmp(db->entries[i2].key, "foo") == 0);
-  assert(strcmp(db->entries[i2].value, "bar") == 0);
+  assert(strcmp(db->entries[i].key, "foo") == 0);
+  assert(strcmp(db->entries[i].value, "bar") == 0);
 
   kv_put(db, "yello", "world");
   kv_put(db, "hellp", "world");

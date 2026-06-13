@@ -64,7 +64,7 @@ int kv_put(kv_t *db, char *key, char *value)
         return -1;
       }
       entry->value = newval;
-      return index;
+      return 0;
     }
 
     if (!entry->key || entry->key == TOMBSTONE)
@@ -80,7 +80,7 @@ int kv_put(kv_t *db, char *key, char *value)
       entry->key = newkey;
       entry->value = newval;
       db->count += 1;
-      return index;
+      return 0;
     }
   }
 
