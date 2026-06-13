@@ -12,7 +12,7 @@ kv_t *kv_init(int capacity)
 
   kv->capacity = capacity;
   kv->count = 0;
-  kv->data = malloc(sizeof(kv->data) * capacity);
+  kv->data = calloc(capacity, sizeof(kv->data));
   if (kv->data == NULL)
   {
     return NULL;
